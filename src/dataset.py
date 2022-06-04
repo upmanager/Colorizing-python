@@ -2,7 +2,8 @@ import os
 import glob
 import numpy as np
 import tensorflow as tf
-from scipy.misc import imread
+# from scipy.misc import imread
+import imageio
 from abc import abstractmethod
 from .utils import unpickle
 
@@ -35,7 +36,7 @@ class BaseDataset():
     def __getitem__(self, index):
         val = self.data[index]
         try:
-            img = imread(val) if isinstance(val, str) else val
+            img = imageio.imread(val) if isinstance(val, str) else val
 
             # grayscale images
             if np.sum(img[:,:,0] - img[:,:,1]) == 0 and np.sum(img[:,:,0] - img[:,:,2]) == 0:
@@ -144,7 +145,7 @@ class TestDataset(BaseDataset):
 
     def __getitem__(self, index):
         path = self.data[index]
-        img = imread(path)
+        img = imageio.imread(path)
         return path, img
 
     def load(self):
