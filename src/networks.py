@@ -12,7 +12,7 @@ class Discriminator(object):
 
     def create(self, inputs, kernel_size=None, seed=None, reuse_variables=None):
         output = inputs
-        with tf.compat.v1variable_scope(self.name, reuse=reuse_variables):
+        with tf.compat.v1.variable_scope(self.name, reuse=reuse_variables):
             for index, kernel in enumerate(self.kernels):
 
                 # not use batch-norm in the first layer
@@ -25,13 +25,13 @@ class Discriminator(object):
                     filters=kernel[0],
                     strides=kernel[1],
                     bnorm=bnorm,
-                    activation=tf.compat.v1nn.leaky_relu,
+                    activation=tf.compat.v1.nn.leaky_relu,
                     seed=seed
                 )
 
                 if kernel[2] > 0:
                     keep_prob = 1.0 - kernel[2] if self.training else 1.0
-                    output = tf.compat.v1nn.dropout(output, keep_prob=keep_prob, name='dropout_' + name, seed=seed)
+                    output = tf.compat.v1.nn.dropout(output, keep_prob=keep_prob, name='dropout_' + name, seed=seed)
 
             output = conv2d(
                 inputs=output,
@@ -43,7 +43,7 @@ class Discriminator(object):
                 seed=seed
             )
 
-            self.var_list = tf.compat.v1get_collection(tf.compat.v1GraphKeys.TRAINABLE_VARIABLES, self.name)
+            self.var_list = tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.TRAINABLE_VARIABLES, self.name)
 
             return output
 
@@ -60,7 +60,7 @@ class Generator(object):
     def create(self, inputs, kernel_size=None, seed=None, reuse_variables=None):
         output = inputs
 
-        with tf.compat.v1variable_scope(self.name, reuse=reuse_variables):
+        with tf.compat.v1.variable_scope(self.name, reuse=reuse_variables):
 
             layers = []
 
@@ -74,7 +74,7 @@ class Generator(object):
                     kernel_size=kernel_size,
                     filters=kernel[0],
                     strides=kernel[1],
-                    activation=tf.compat.v1nn.leaky_relu,
+                    activation=tf.compat.v1.nn.leaky_relu,
                     seed=seed
                 )
 
@@ -83,7 +83,7 @@ class Generator(object):
                 
                 if kernel[2] > 0:
                     keep_prob = 1.0 - kernel[2] if self.training else 1.0
-                    output = tf.compat.v1nn.dropout(output, keep_prob=keep_prob, name='dropout_' + name, seed=seed)
+                    output = tf.compat.v1.nn.dropout(output, keep_prob=keep_prob, name='dropout_' + name, seed=seed)
 
             # decoder branch
             for index, kernel in enumerate(self.decoder_kernels):
@@ -95,17 +95,17 @@ class Generator(object):
                     kernel_size=kernel_size,
                     filters=kernel[0],
                     strides=kernel[1],
-                    activation=tf.compat.v1nn.relu,
+                    activation=tf.compat.v1.nn.relu,
                     seed=seed
                 )
 
                 if kernel[2] > 0:
                     keep_prob = 1.0 - kernel[2] if self.training else 1.0
-                    output = tf.compat.v1nn.dropout(output, keep_prob=keep_prob, name='dropout_' + name, seed=seed)
+                    output = tf.compat.v1.nn.dropout(output, keep_prob=keep_prob, name='dropout_' + name, seed=seed)
 
                 # concat the layer from the contracting path with the output of the current layer
                 # concat only the channels (axis=3)
-                output = tf.compat.v1concat([layers[len(layers) - index - 2], output], axis=3)
+                output = tf.compat.v1.concat([layers[len(layers) - index - 2], output], axis=3)
 
             output = conv2d(
                 inputs=output,
@@ -114,10 +114,10 @@ class Generator(object):
                 kernel_size=1,                  # last layer kernel size = 1
                 strides=1,                      # last layer stride = 1
                 bnorm=False,                    # do not use batch-norm for the last layer
-                activation=tf.compat.v1nn.tanh,          # tanh activation function for the output
+                activation=tf.compat.v1.nn.tanh,          # tanh activation function for the output
                 seed=seed
             )
 
-            self.var_list = tf.compat.v1get_collection(tf.compat.v1GraphKeys.TRAINABLE_VARIABLES, self.name)
+            self.var_list = tf.compat.v1.get_collection(tf.compat.v1.GraphKeys.TRAINABLE_VARIABLES, self.name)
 
             return output
