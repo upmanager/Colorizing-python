@@ -10,17 +10,17 @@ from .dataset import CIFAR10_DATASET, PLACES365_DATASET
 def main(options):
 
     # reset tensorflow graph
-    tf.reset_default_graph()
+    tf.compat.v1reset_default_graph()
 
 
     # initialize random seed
-    tf.set_random_seed(options.seed)
+    tf.compat.v1set_random_seed(options.seed)
     np.random.seed(options.seed)
     random.seed(options.seed)
 
 
     # create a session environment
-    with tf.Session() as sess:
+    with tf.compat.v1Session() as sess:
 
         if options.dataset == CIFAR10_DATASET:
             model = Cifar10Model(sess, options)
@@ -37,7 +37,7 @@ def main(options):
 
         # build the model and initialize
         model.build()
-        sess.run(tf.global_variables_initializer())
+        sess.run(tf.compat.v1global_variables_initializer())
 
 
         # load model only after global variables initialization

@@ -1,8 +1,6 @@
 import os
 import glob
 import numpy as np
-import tensorflow as tf
-# from scipy.misc import imread
 import imageio
 from abc import abstractmethod
 from .utils import unpickle

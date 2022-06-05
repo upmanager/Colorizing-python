@@ -1,6 +1,6 @@
-numpy ~= 1.14.3
-scipy ~= 1.0.1
-future ~= 0.16.0
-matplotlib ~= 2.2.2
-pillow >= 6.2.0
-tensorflow==1.7
+numpy
+scipy
+future
+matplotlib
+pillow
+tensorflow
