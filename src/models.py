@@ -125,7 +125,7 @@ class BaseModel:
             path = os.path.join(outputs_path, name)
             print(img_gray)
 
-            feed_dic = {self.input_gray: img_gray[None, :, :, None]}
+            feed_dic = {self.input_gray: img_gray[None, :, :, None, None]}
             print(feed_dic)
             outputs = self.sess.run(self.sampler, feed_dict=feed_dic)
             outputs = postprocess(tf.compat.v1.convert_to_tensor(outputs), colorspace_in=self.options.color_space, colorspace_out=COLORSPACE_RGB).eval() * 255
@@ -189,7 +189,7 @@ class BaseModel:
 
         # test mode: model input is a graycale placeholder
         if self.options.mode == 1:
-            self.input_gray = tf.compat.v1.placeholder(tf.compat.v1.float32, shape=(None, None, None, 1, 1), name='input_gray')
+            self.input_gray = tf.compat.v1.placeholder(tf.compat.v1.float32, shape=(None, None, None, 1), name='input_gray')
 
         # train/turing-test we extract grayscale image from color image
         else:
