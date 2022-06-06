@@ -189,7 +189,7 @@ class BaseModel:
 
         # test mode: model input is a graycale placeholder
         if self.options.mode == 1:
-            self.input_gray = tf.compat.v1.placeholder(tf.compat.v1.float32, shape=(None, None, None, 1), name='input_gray')
+            self.input_gray = tf.compat.v1.placeholder(tf.compat.v1.float32, shape=(None, None, None, 1, 0), name='input_gray')
 
         # train/turing-test we extract grayscale image from color image
         else:
