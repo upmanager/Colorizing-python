@@ -123,10 +123,9 @@ class BaseModel:
             img_gray_path, img_gray = dataset[index]
             name = os.path.basename(img_gray_path)
             path = os.path.join(outputs_path, name)
-            print(img_gray)
+            print(img_gray[None, :, :, None])
 
-            feed_dic = {self.input_gray: img_gray[None, :, :, None, None]}
-            print(feed_dic)
+            feed_dic = {self.input_gray: img_gray[None, :, :]}
             outputs = self.sess.run(self.sampler, feed_dict=feed_dic)
             outputs = postprocess(tf.compat.v1.convert_to_tensor(outputs), colorspace_in=self.options.color_space, colorspace_out=COLORSPACE_RGB).eval() * 255
             print(path)
