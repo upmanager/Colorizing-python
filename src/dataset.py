@@ -147,7 +147,6 @@ class TestDataset(BaseDataset):
         return path, img
 
     def load(self):
-        print(self.path)
         if os.path.isfile(self.path):
             data = [self.path]
 
