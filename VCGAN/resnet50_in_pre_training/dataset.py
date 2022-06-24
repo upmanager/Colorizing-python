@@ -45,6 +45,7 @@ class ImageNetTrainSet(Dataset):
                 H_out = int(math.floor(H * float(W_out) / float(W)))
                 img = cv2.resize(img, (W_out, H_out))
         # crop
+        print("size => ", H, W)
         if self.opt.crop_size > 0:
             rand_h = random.randint(0, H - self.opt.crop_size)
             rand_w = random.randint(0, W - self.opt.crop_size)
