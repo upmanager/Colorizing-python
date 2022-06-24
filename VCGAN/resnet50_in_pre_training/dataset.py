@@ -46,10 +46,10 @@ class ImageNetTrainSet(Dataset):
                 img = cv2.resize(img, (W_out, H_out))
         # crop
         print("size => ", H, W)
-        if self.opt.crop_size > 0:
-            rand_h = random.randint(0, H - self.opt.crop_size)
-            rand_w = random.randint(0, W - self.opt.crop_size)
-            img = img[rand_h:rand_h+self.opt.crop_size, rand_w:rand_w+self.opt.crop_size, :]
+        # if self.opt.crop_size > 0:
+        #     rand_h = random.randint(0, H - self.opt.crop_size)
+        #     rand_w = random.randint(0, W - self.opt.crop_size)
+        #     img = img[rand_h:rand_h+self.opt.crop_size, rand_w:rand_w+self.opt.crop_size, :]
         img = cv2.resize(img, (self.opt.train_size, self.opt.train_size), interpolation = cv2.INTER_CUBIC)
         # normalization
         img = torch.from_numpy(img.astype(np.float32) / 255.0).permute(2, 0, 1).contiguous()
