@@ -1,5 +1,5 @@
 python train.py \
---baseroot '/mnt/lustre/zhaoyuzhi/dataset/ILSVRC2012_train_256' \
+--baseroot './dataset' \
 --type 'resnet50' \
 --task 'rgb' \
 --checkpoint_interval 10 \
