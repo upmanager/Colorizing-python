@@ -24,9 +24,7 @@ if __name__ == "__main__":
     parser.add_argument('--init_type', type = str, default = 'kaiming', help = 'SGD: momentum')
     parser.add_argument('--init_gain', type = float, default = 0.02, help = 'SGD: weight-decay, L2 normalization')
     # Dataset setting
-    parser.add_argument('--baseroot', type = str, \
-        default = './dataset\\', \
-            help = 'the training folder, while adding "\\" at the end of this string')
+    parser.add_argument('--baseroot', type = str, default = './dataset\\', help = 'the training folder, while adding "\\" at the end of this string')
     parser.add_argument('--crop_size', type = int, default = 256, help = 'size of image crop')
     parser.add_argument('--train_size', type = int, default = 256, help = 'size of image for training')
     parser.add_argument('--stringlist', type = str, default = './txt/mapping_string.txt', help = 'mapping_string')

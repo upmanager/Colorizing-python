@@ -72,7 +72,6 @@ def Trainer(opt):
 
     # Define the dataset
     trainset = dataset.ImageNetTrainSet(opt)
-    print("trainset", trainset)
     print('The overall number of images equals to %d' % len(trainset))
 
     # Define the dataloader

@@ -19,7 +19,9 @@ def get_files(path):
 def get_jpgs(path):
     # read a folder, return the image name
     ret = []
+    print("get jpgs", path)
     for root, dirs, files in os.walk(path):
+        print(files)
         for filespath in files:
             ret.append(filespath)
     return ret

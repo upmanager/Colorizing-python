@@ -15,7 +15,6 @@ class ImageNetTrainSet(Dataset):
         self.imglist = utils.get_jpgs(opt.baseroot)
         self.stringlist = utils.text_readlines(opt.stringlist)
         self.scalarlist = utils.text_readlines(opt.scalarlist)
-        print(len(self.imglist), len(self.stringlist), len(self.scalarlist))
     
     def __getitem__(self, index):
         ### image part
