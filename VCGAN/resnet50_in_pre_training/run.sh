@@ -1,5 +1,5 @@
 python train.py \
---baseroot './dataset' \
+--baseroot '../datasets' \
 --type 'resnet50' \
 --task 'rgb' \
 --checkpoint_interval 10 \
