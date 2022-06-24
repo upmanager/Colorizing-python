@@ -81,6 +81,7 @@ class ImageNetTrainSet(Dataset):
             img = torch.cat((img, mask), 0)
             
         ### target part
+        target = None
         stringname = imgname[:9]                                            # category by str: like n01440764
         for index, value in enumerate(self.stringlist):
             if stringname == value:
