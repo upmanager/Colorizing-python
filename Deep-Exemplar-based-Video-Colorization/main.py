@@ -12,6 +12,7 @@ import torch.backends.cudnn as cudnn
 import torchvision.transforms as transform_lib
 from PIL import Image
 from tqdm import tqdm
+import shutil
 
 import lib.TestTransforms as transforms
 from models.ColorVidNet import ColorVidNet
@@ -214,6 +215,8 @@ def hello_world():
 def colorizing():
     v_file = request.files['video']
     r_files = request.files.getlist('ref[]')
+
+    shutil.rmtree(os.path.join(_PATH_, "example"))
 
     uploadPath = joinPath(_PATH_, "example")
     clip_path = joinPath(uploadPath, "clips")
