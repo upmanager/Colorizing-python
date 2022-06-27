@@ -40,7 +40,7 @@ python train.py \
 --norm 'in' \
 --init_type 'xavier' \
 --init_gain 0.02 \
---baseroot '/mnt/lustre/zhaoyuzhi/dataset' \
+--baseroot './dataset' \
 --iter_frames 5 \
 --sample_size 1 \
 --crop_size 256 \
